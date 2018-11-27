@@ -4,14 +4,32 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "type": "npm",
-            "script": "e2e",
-            "problemMatcher": []
+        "identifier": "ng serve",
+        "type": "npm",
+        "script": "start",
+        "group": {
+            "kind": "build",
+            "isDefault": true
         },
-        {
-            "type": "npm",
-            "script": "start",
-            "problemMatcher": []
+        "problemMatcher": {
+            "owner": "typescript",
+            "source": "ts",
+            "applyTo": "closedDocuments",
+            "fileLocation": [
+            "relative",
+            "${cwd}"
+            ],
+            "pattern": "$tsc",
+            "background": {
+            "activeOnStart": true,
+            "beginsPattern": {
+                "regexp": "Compiling...|TS\\d+:"
+            },
+            "endsPattern": {
+                "regexp": "Compiled |Failed to compile."
+            }
+            }
         }
+        },
     ]
 }
