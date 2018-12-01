@@ -1,0 +1,93 @@
+mat-card {
+    max-width: 400px;
+    margin: 2em auto;
+    text-align: center;
+}
+
+mat-card-content {
+    display:inline-block;
+}
+
+.signin-content {
+    padding: 60px 1rem;
+}
+
+.full-width-input {
+    width: 100%;
+}
+
+.fill-remaining-space {
+    flex: 1 1 auto;
+}
+
+.mat-raised-button.mat-primary {
+    background: #3C9954 !important;
+}
+
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline {
+    border-bottom: 1px solid #3C9954 !important;
+    background-color: #3C9954 !important;
+}
+
+::ng-deep .mat-form-field.mat-focused .mat-form-field-ripple {
+    background-color: #3C9954 !important;
+}
+
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+    color: #3C9954 !important;
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-container > * {
+    width: 100%;
+}
+
+.fullWidth {
+    width: 100%;
+}
+
+.center {
+    text-align: center;
+}
+
+.closebtn {
+    float: right;
+    outline: none !important;
+}
+
+.cursorPointer {
+    cursor: pointer;
+}
+
+::ng-deep .mat-snack-bar-container {
+    background: #0071BC !important;
+    display:block !important;
+}
+
+::ng-deep .mat-snack-bar-container .mat-simple-snackbar {
+    font-size: 1em !important;
+    font-weight: normal !important;
+    flex-wrap: nowrap !important;
+}
+
+::ng-deep .mat-dialog-actions {
+    padding: 20px 0;
+}
+
+::ng-deep .mat-dialog-title {
+    font-weight: bold;
+}
+
+.loginButton {
+    color: #ffffff;
+    background-color: #208039;
+}
+
+.loginButton:disabled {
+    color: #E0E0E0;
+    background-color: #3C9954;
+}

@@ -1,0 +1,11 @@
+.fill-remaining-space {
+    flex: 1 1 auto;
+}
+
+.mat-primary {
+    background: #0B6623 !important;
+}
+
+.loginLogoutButton {
+    outline-color: #3C9954;
+}

@@ -1,61 +1,64 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, Inject, OnInit, AfterViewInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { first } from 'rxjs/operators';
-
 import { AuthenticationService } from '../_services/authentication.service';
 
-@Component({ templateUrl: 'login.component.html' })
-export class LoginComponent implements OnInit {
-    loginForm: FormGroup;
-    loading = false;
-    submitted = false;
-    returnUrl: string;
-    error = '';
+@Component({
+    selector: 'app-login',
+    templateUrl: 'login.component.html',
+    styleUrls: ['login.component.css']
+})
 
-    constructor(
-        private formBuilder: FormBuilder,
-        private route: ActivatedRoute,
-        private router: Router,
-        private authenticationService: AuthenticationService
-    ) {
-        // redirect to home if already logged in
-        if (this.authenticationService.currentUserValue) {
-            this.router.navigate(['/']);
-        }
+export class LoginComponent implements OnInit, AfterViewInit {
+    constructor(public dialogRef: MatDialogRef<LoginComponent>,
+        @Inject(MAT_DIALOG_DATA) public data: any,
+        private authService: AuthenticationService,
+        private fb: FormBuilder) {
+        this.createForm();
+    }
+
+    private formSubmitAttempt!: boolean;
+    public loginForm: FormGroup;
+    public  hide = true;
+
+    createForm() {
+        this.loginForm = this.fb.group({
+            Username: ['', Validators.required],
+            Password: ['', Validators.required]
+        });
     }
 
     ngOnInit() {
-        this.loginForm = this.formBuilder.group({
-            username: ['', Validators.required],
-            password: ['', Validators.required]
-        });
 
-        // get return url from route parameters or default to '/'
-        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
 
-    // convenience getter for easy access to form fields
-    get f() { return this.loginForm.controls; }
+     ngAfterViewInit() {
+
+     }
+
+    close() {
+        this.dialogRef.close('Cancelled');
+    }
 
     onSubmit() {
-        this.submitted = true;
+        this.formSubmitAttempt = true;
 
-        // stop here if form is invalid
-        if (this.loginForm.invalid) {
-            return;
+        if (this.loginForm.valid) {
+            this.authService.login(this.loginForm.get('Username').value,
+                                   this.loginForm.get('Password').value).then((response: any) => {
+                if (this.authService.isLoggedIn) {
+                    this.dialogRef.close('Success');
+                } else {
+                    this.dialogRef.close('Failed');
+                }
+            }).catch(err => this.dialogRef.close('Failed'));
         }
+    }
 
-        this.loading = true;
-        this.authenticationService.login(this.f.username.value, this.f.password.value)
-            .pipe(first())
-            .subscribe(
-                data => {
-                    this.router.navigate([this.returnUrl]);
-                },
-                error => {
-                    this.error = error;
-                    this.loading = false;
-                });
+    isFieldInvalid(field: string) {
+        return (
+            (!this.loginForm.get(field).valid && this.loginForm.get(field).touched) ||
+            (this.loginForm.get(field).untouched && this.formSubmitAttempt)
+        );
     }
 }
