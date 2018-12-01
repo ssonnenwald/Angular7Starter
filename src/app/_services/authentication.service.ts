@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { map } from 'rxjs/operators';
-
+import { map, catchError } from 'rxjs/operators';
 import { User } from '../_models/user';
 import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
@@ -12,6 +11,7 @@ export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
     private loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    private adminUser: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
     constructor(private http: HttpClient,
         private router: Router) {
@@ -31,10 +31,22 @@ export class AuthenticationService {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
                     localStorage.setItem('currentUser', JSON.stringify(user));
                     this.currentUserSubject.next(user);
+
+                    // Store username and jwt token in session storage to keep user logged in between page r67efreshes.
+                    sessionStorage.setItem('access_token', user.token);
+
+                    this.loggedIn.next(true);
+                    this.router.navigate(['/home']);
                 }
 
                 return user;
-            }));
+            }), catchError(err => this.handleError(err)))
+            .toPromise().catch(err => {
+                this.loggedIn.next(false);
+                this.router.navigate(['/home']);
+
+                throw(err.message);
+            });
     }
 
     logout() {
@@ -46,13 +58,11 @@ export class AuthenticationService {
     get isLoggedIn() {
         if (sessionStorage.getItem('access_token') != null &&
             sessionStorage.getItem('access_token') !== 'No Token') {
-            // const token: string = this.jwtHelperService.tokenGetter();
+            const token: string = sessionStorage.getItem('access_token');
 
-            // if (token) {
-            if (true) {
+             if (token) {
                 // const tokenExpired: boolean = this.jwtHelperService.isTokenExpired(token);
 
-                // if (tokenExpired) {
                 if (false) {
                    this.logout();
                 }
@@ -60,6 +70,10 @@ export class AuthenticationService {
         }
 
         return this.loggedIn.asObservable();
+    }
+
+    get isAdmin() {
+        return this.adminUser.asObservable();
     }
 
     private handleError(error: HttpErrorResponse) {

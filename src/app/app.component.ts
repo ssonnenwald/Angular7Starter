@@ -17,7 +17,7 @@ export class AppComponent {
         private authenticationService: AuthenticationService,
         public dialog: MatDialog,
         private snackBar: MatSnackBar) {
-            this.isLoggedIn$ = new Observable(ob => {ob.next(false); });
+            this.isLoggedIn$ = this.authenticationService.isLoggedIn;
     }
 
     public isLoggedIn$: Observable<boolean>;
@@ -29,7 +29,9 @@ export class AppComponent {
     }
 
     onLoginLogout(): void {
-        this.isLoggedIn$.subscribe(val => { this.isLoggedIn = val; });
+        this.isLoggedIn$.subscribe(val => {
+            this.isLoggedIn = val;
+        });
 
         if (this.isLoggedIn) {
             this.authenticationService.logout();
