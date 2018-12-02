@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef, ViewChild, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from './_services/authentication.service';
-import { MatDialog, MatSnackBar } from '@angular/material';
+import { MatDialog, MatSnackBar, MatSidenav } from '@angular/material';
 import { Observable } from 'rxjs';
 import { LoginComponent } from './login/login.component';
+import { MediaMatcher } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-root',
@@ -11,17 +12,34 @@ import { LoginComponent } from './login/login.component';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
     constructor(
         private router: Router,
         private authenticationService: AuthenticationService,
         public dialog: MatDialog,
-        private snackBar: MatSnackBar) {
+        private snackBar: MatSnackBar,
+        private media: MediaMatcher,
+        private changeDetectorRef: ChangeDetectorRef
+        ) {
             this.isLoggedIn$ = this.authenticationService.isLoggedIn;
+
+            this.mobileQuery = this.media.matchMedia('(max-width: 992px)');
+            this._mobileQueryListener = () => this.changeDetectorRef.detectChanges();
+            this.mobileQuery.addListener(this._mobileQueryListener);
     }
 
+    public displayMode = 'flat';
+    public mobileQuery: MediaQueryList;
+
+    private _mobileQueryListener: () => void;
     public isLoggedIn$: Observable<boolean>;
     private isLoggedIn = false;
+
+    @ViewChild('sidenav') public sidenav: MatSidenav;
+
+    ngAfterViewInit(): void {
+        window.dispatchEvent(new Event('resize'));
+    }
 
     logout() {
         this.authenticationService.logout();
@@ -69,5 +87,9 @@ export class AppComponent {
                  }
             });
         }
+    }
+
+    closeSidenav() {
+        this.sidenav.close();
     }
 }

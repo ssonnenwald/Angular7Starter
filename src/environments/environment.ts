@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   config:
     {
-      apiUrl: JSON.stringify('http://localhost:4200')
+      apiUrl: 'http://localhost:4200'
     }
 };
 

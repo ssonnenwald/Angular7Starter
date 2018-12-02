@@ -9,3 +9,89 @@
 .loginLogoutButton {
     outline-color: #3C9954;
 }
+
+mat-sidenav {
+    padding-right: 1em;
+}
+
+.menuButton {
+    outline-color: #3C9954;
+}
+
+.menuItemHome {
+    margin-right: .5em;
+    color:#0B6623;
+}
+
+.menuItemHomeLink {
+    vertical-align: top;
+}
+
+.menuItem1 {
+    margin-right: .5em;
+    color:#0B6623;
+}
+
+.menuItem1Link {
+    vertical-align: top;
+}
+
+.menuItem2 {
+    margin-right: .5em;
+    color:#0B6623;
+}
+
+.menuItem2Link {
+    vertical-align: top;
+}
+
+.menuItem3 {
+    margin-right: .5em;
+    color:#0B6623;
+}
+
+.menuItem3Link {
+    vertical-align: top;
+}
+
+.menuItem4 {
+    margin-right: .5em;
+    color:#0B6623;
+}
+
+.menuItem4Link {
+    vertical-align: top;
+}
+
+.expansionPanelHeaderMenuItem4 {
+    padding-left: 0px;
+}
+
+.menuItem4SubMenuItem1 {
+    margin-left: 1.5em;
+}
+
+.menuItem4SubMenuItem2 {
+    margin-left: 1.5em;
+}
+
+.menuItem5 {
+    margin-right: .5em;
+    color:#0B6623;
+}
+
+.menuItem5Link {
+    vertical-align: top;
+}
+
+.sideMenuContent {
+    background-color:#fff;
+}
+
+::ng-deep .mat-drawer-content {
+    overflow: hidden !important;
+}
+
+::ng-deep .mat-drawer-container {
+   padding: 0 !important;
+}

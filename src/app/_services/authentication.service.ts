@@ -24,7 +24,9 @@ export class AuthenticationService {
     }
 
     public async login(username: string, password: string): Promise<any> {
-        return this.http.post<any>('${environment.config.apiUrl}/users/authenticate', { username, password })
+        const postUrl = environment.config.apiUrl + '/users/authenticate';
+
+        return this.http.post<any>(postUrl, { username, password })
             .pipe(map(user => {
                 // login successful if there's a jwt token in the response
                 if (user && user.token) {
@@ -43,7 +45,7 @@ export class AuthenticationService {
             }), catchError(err => this.handleError(err)))
             .toPromise().catch(err => {
                 this.loggedIn.next(false);
-                this.router.navigate(['/home']);
+                this.router.navigate(['/']);
 
                 throw(err.message);
             });
@@ -60,7 +62,7 @@ export class AuthenticationService {
             sessionStorage.getItem('access_token') !== 'No Token') {
             const token: string = sessionStorage.getItem('access_token');
 
-             if (token) {
+             if (token.length > 0) {
                 // const tokenExpired: boolean = this.jwtHelperService.isTokenExpired(token);
 
                 if (false) {
