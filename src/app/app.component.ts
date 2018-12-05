@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ChangeDetectorRef, ViewChild, AfterViewInit, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from './_services/authentication.service';
 import { MatDialog, MatSnackBar, MatSidenav } from '@angular/material';
@@ -22,7 +22,6 @@ export class AppComponent implements AfterViewInit {
         private changeDetectorRef: ChangeDetectorRef
         ) {
             this.isLoggedIn$ = this.authenticationService.isLoggedIn;
-
             this.mobileQuery = this.media.matchMedia('(max-width: 992px)');
             this._mobileQueryListener = () => this.changeDetectorRef.detectChanges();
             this.mobileQuery.addListener(this._mobileQueryListener);
@@ -91,5 +90,13 @@ export class AppComponent implements AfterViewInit {
 
     closeSidenav() {
         this.sidenav.close();
+    }
+
+    // when screen is resized
+    @HostListener('window:resize', ['$event'])
+    onResize(event) {
+        if (event.target.innerWidth > 992) {
+            this.sidenav.close();
+        }
     }
 }

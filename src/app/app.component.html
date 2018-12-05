@@ -4,86 +4,85 @@
     - Large devices (desktops, 992px and up)
     - Extra large devices (large desktops, 1200px and up) 
 -->
-<mat-toolbar color="primary">    
-    <mat-toolbar-row>
-        <button id="mnuMenu" mat-icon-button class="d-block d-lg-none menuButton" *ngIf="isLoggedIn$ | async as isLoggedIn" (click)="sidenav.toggle()" title="Menu">
-            <mat-icon class="md-24">menu</mat-icon>
-        </button>￼     
-        <span class="fill-remaining-space"></span>
-        <button id="btnLoginLogout" class="loginLogoutButton" mat-button (click)="onLoginLogout()">{{ (isLoggedIn$ | async) === true ? 'Logout' : 'Login' }}</button>   
-    </mat-toolbar-row>         
-</mat-toolbar>
+<div class="row">
+    <mat-toolbar color="primary">    
+        <mat-toolbar-row>
+            <button id="mnuMenu" mat-icon-button class="d-block d-lg-none menuButton" *ngIf="isLoggedIn$ | async as isLoggedIn" (click)="sidenav.toggle()" title="Menu">
+                <mat-icon class="md-24">menu</mat-icon>
+            </button>￼     
+            <span class="fill-remaining-space"></span>
+            <button id="btnLoginLogout" class="loginLogoutButton" mat-button (click)="onLoginLogout()">{{ (isLoggedIn$ | async) === true ? 'Logout' : 'Login' }}</button>   
+        </mat-toolbar-row>         
+    </mat-toolbar>
+</div>
 
 <!-- main app container -->
-<div class="jumbotron">
-  <div class="container-fluid px-0">
-      <div class="row">
-            <mat-sidenav-container class="col-12" *ngIf="isLoggedIn$ | async as isLoggedIn">
-                <mat-sidenav #sidenav mode="mobileQuery.matches ? 'over' : 'side'" [opened]="false">
-                    <mat-nav-list>
-                        <!-- Wrap all the nav items in an accordion panel -->
-                        <mat-accordion [displayMode]="displayMode">
-                            <div>
-                                <!-- 
-                                    Use a simple div for an item that has no children,
-                                    match up the styling to the expansion panel styles 
-                                -->
-                                <div class="nav-head">
-                                    <a class="nav-link" [routerLink]="['/home']" routerLinkActive="selected" (click)="closeSidenav()">
-                                        <mat-icon class="menuItemHome">home</mat-icon>
-                                        <span class="nav-link-text menuItemHomeLink">Home</span>
-                                    </a>
+<div class="row col px-0 mx-0">
+    <mat-sidenav-container class="col-12" *ngIf="isLoggedIn$ | async as isLoggedIn">
+        <mat-sidenav #sidenav mode="mobileQuery.matches ? 'over' : 'side'" [opened]="false">
+            <mat-nav-list>
+                <!-- Wrap all the nav items in an accordion panel -->
+                <mat-accordion [displayMode]="displayMode">
+                    <div>
+                        <!-- 
+                            Use a simple div for an item that has no children,
+                            match up the styling to the expansion panel styles 
+                        -->
+                        <div class="nav-head">
+                            <a class="nav-link" [routerLink]="['/home']" routerLinkActive="selected" (click)="closeSidenav()">
+                                <mat-icon class="menuItemHome">home</mat-icon>
+                                <span class="nav-link-text menuItemHomeLink">Home</span>
+                            </a>
+                        </div>
+                        <div class="nav-head">
+                            <a class="nav-link" [routerLink]="['/home']" routerLinkActive="selected" (click)="closeSidenav()">
+                                <mat-icon class="menuItem1">home</mat-icon>
+                                <span class="nav-link-text menuItem1Link">MenuItem 1</span>
+                            </a>
+                        </div>
+                        <div class="nav-head">
+                            <a class="nav-link" [routerLink]="['/home']" routerLinkActive="selected" (click)="closeSidenav()">
+                                <mat-icon class="menuItem2">home</mat-icon>
+                                <span class="nav-link-text menuItem2Link">MenuItem 2</span>
+                            </a>
+                        </div>
+                        <div class="nav-head">
+                            <a class="nav-link" [routerLink]="['/home']" routerLinkActive="selected" (click)="closeSidenav()">
+                                <mat-icon class="menuItem3">home</mat-icon>
+                                <span class="nav-link-text menuItem3Link">MenuItem 3</span>
+                            </a>
+                        </div>
+                        <!-- Use expansion panel for heading item with sub page links -->
+                        <mat-expansion-panel class="mat-elevation-z0">
+                            <mat-expansion-panel-header class="nav-head" [expandedHeight]="'48px'" class="expansionPanelHeaderMenuItem4">
+                                <mat-panel-title class="nav-link">
+                                    <mat-icon class="menuItem4">home</mat-icon>
+                                    <span class="nav-link-text menuItem4Link">MenuItem 4</span>
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>                        
+                            <div class="nav-section">
+                                <!-- Sub pages -->
+                                <div class="nav-item">
+                                    <a class="nav-link" [routerLink]="['/home']" routerLinkActive="selected" (click)="closeSidenav()" class="menuItem4SubMenuItem1">MenuItem 4 SubMenuItem1</a>
                                 </div>
-                                <div class="nav-head">
-                                    <a class="nav-link" [routerLink]="['/home']" routerLinkActive="selected" (click)="closeSidenav()">
-                                        <mat-icon class="menuItem1">home</mat-icon>
-                                        <span class="nav-link-text menuItem1Link">MenuItem 1</span>
-                                    </a>
-                                </div>
-                                <div class="nav-head">
-                                    <a class="nav-link" [routerLink]="['/home']" routerLinkActive="selected" (click)="closeSidenav()">
-                                        <mat-icon class="menuItem2">home</mat-icon>
-                                        <span class="nav-link-text menuItem2Link">MenuItem 2</span>
-                                    </a>
-                                </div>
-                                <div class="nav-head">
-                                    <a class="nav-link" [routerLink]="['/home']" routerLinkActive="selected" (click)="closeSidenav()">
-                                        <mat-icon class="menuItem3">home</mat-icon>
-                                        <span class="nav-link-text menuItem3Link">MenuItem 3</span>
-                                    </a>
-                                </div>
-                                <!-- Use expansion panel for heading item with sub page links -->
-                                <mat-expansion-panel class="mat-elevation-z0">
-                                    <mat-expansion-panel-header class="nav-head" [expandedHeight]="'48px'" class="expansionPanelHeaderMenuItem4">
-                                        <mat-panel-title class="nav-link">
-                                            <mat-icon class="menuItem4">home</mat-icon>
-                                            <span class="nav-link-text menuItem4Link">MenuItem 4</span>
-                                        </mat-panel-title>
-                                    </mat-expansion-panel-header>                        
-                                    <div class="nav-section">
-                                        <!-- Sub pages -->
-                                        <div class="nav-item">
-                                            <a class="nav-link" [routerLink]="['/home']" routerLinkActive="selected" (click)="closeSidenav()" class="menuItem4SubMenuItem1">MenuItem 4 SubMenuItem1</a>
-                                        </div>
-                                        <div class="nav-item">
-                                            <a class="nav-link" [routerLink]="['/home']" routerLinkActive="selected" (click)="closeSidenav()" class="menuItem4SubMenuItem2">MenuItem 4 SubMenuItem2</a>
-                                        </div>
-                                    </div>
-                                </mat-expansion-panel>
-                                <div class="nav-head">
-                                    <a class="nav-link" [routerLink]="['/home']" routerLinkActive="selected" (click)="closeSidenav()">
-                                        <mat-icon class="menuItem5">home</mat-icon>
-                                        <span class="nav-link-text menuItem5Link">MenuItem 5</span>
-                                    </a>
+                                <div class="nav-item">
+                                    <a class="nav-link" [routerLink]="['/home']" routerLinkActive="selected" (click)="closeSidenav()" class="menuItem4SubMenuItem2">MenuItem 4 SubMenuItem2</a>
                                 </div>
                             </div>
-                        </mat-accordion>
-                    </mat-nav-list>    
-                </mat-sidenav>
-                <mat-sidenav-content class="sideMenuContent">
-                    <router-outlet></router-outlet>
-                </mat-sidenav-content>                
-            </mat-sidenav-container>
-      </div>
-  </div>
+                        </mat-expansion-panel>
+                        <div class="nav-head">
+                            <a class="nav-link" [routerLink]="['/home']" routerLinkActive="selected" (click)="closeSidenav()">
+                                <mat-icon class="menuItem5">home</mat-icon>
+                                <span class="nav-link-text menuItem5Link">MenuItem 5</span>
+                            </a>
+                        </div>
+                    </div>
+                </mat-accordion>
+            </mat-nav-list>    
+        </mat-sidenav>
+        <mat-sidenav-content class="sideMenuContent">
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>                
+    </mat-sidenav-container>
 </div>
+
