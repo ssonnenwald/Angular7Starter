@@ -1,11 +1,23 @@
-import { browser, by, element } from 'protractor';
+import { browser, by, element, ElementFinder } from 'protractor';
 
 export class AppPage {
   navigateTo() {
     return browser.get('/');
   }
 
-  getTitleText() {
-    return element(by.css('app-root h1')).getText();
+  getPageTitle() {
+    return browser.getTitle();
+  }
+
+  getLoginLogoutButton(): ElementFinder {
+    return element(by.css('#btnLoginLogout'));
+  }
+
+  getLoginDialog(): ElementFinder {
+    return element(by.css('#mat-dialog-0'));
+  }
+
+  getDialogCloseButton(): ElementFinder {
+    return element(by.css('#closebtn'));
   }
 }

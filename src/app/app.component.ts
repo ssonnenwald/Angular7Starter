@@ -64,11 +64,11 @@ export class AppComponent implements AfterViewInit {
             .subscribe(dialogResult => {
                 switch (dialogResult) {
                     case 'Success': {
-                        this.snackBar.open('Successfully logged.');
+                        this.snackBar.open('Successfully logged in.');
                        break;
                     }
                     case 'Failed': {
-                        this.snackBar.open('Failed to login.');
+                        this.snackBar.open('Failed to login in.');
                         break;
                      }
                     case 'Cancelled': {
@@ -96,7 +96,9 @@ export class AppComponent implements AfterViewInit {
     @HostListener('window:resize', ['$event'])
     onResize(event) {
         if (event.target.innerWidth > 992) {
-            this.sidenav.close();
+            if (this.sidenav !== undefined) {
+                this.sidenav.close();
+            }
         }
     }
 }

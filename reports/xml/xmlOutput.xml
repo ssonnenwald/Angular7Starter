@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites disabled="0" errors="0" failures="0" tests="11" time="11.951">
+ <testsuite name="Angular 7" timestamp="2018-12-06T23:50:22" hostname="localhost" time="2.555" errors="0" tests="3" skipped="0" disabled="0" failures="0">
+  <testcase classname="Angular 7" name="should display page title" time="0.037" />
+  <testcase classname="Angular 7" name="Should get the Login/Logout button" time="0.061" />
+  <testcase classname="Angular 7" name="Should display a login dialog when the login button is clicked" time="0.335" />
+ </testsuite>
+ <testsuite name="Angular 7 - Login Dialog" timestamp="2018-12-06T23:50:25" hostname="localhost" time="9.396" errors="0" tests="8" skipped="0" disabled="0" failures="0">
+  <testcase classname="Angular 7 - Login Dialog" name="Should display a title" time="0.071" />
+  <testcase classname="Angular 7 - Login Dialog" name="Should display a close button" time="0.024" />
+  <testcase classname="Angular 7 - Login Dialog" name="Should display textbox to enter the User Name" time="0.025" />
+  <testcase classname="Angular 7 - Login Dialog" name="Should display a textbox to enter the User Password" time="0.009" />
+  <testcase classname="Angular 7 - Login Dialog" name="Should display a login button" time="0.015" />
+  <testcase classname="Angular 7 - Login Dialog" name="Login button is disabled if no user name or password" time="0.089" />
+  <testcase classname="Angular 7 - Login Dialog" name="Login button is enabled if a user name and password is entered" time="0.506" />
+  <testcase classname="Angular 7 - Login Dialog" name="Should login with a valid user name and password" time="7.219" />
+ </testsuite>
+</testsuites>

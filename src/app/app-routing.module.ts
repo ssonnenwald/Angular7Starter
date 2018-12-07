@@ -9,7 +9,7 @@ import { Role } from './_models/role';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'home',
     component: HomeComponent,
     canActivate: [AuthGuard]
   },
